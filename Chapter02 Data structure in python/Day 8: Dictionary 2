@@ -242,5 +242,5 @@ for k, v in survey_dict.items():
     print(mydicts)      # {'西瓜': '1.2', '黄瓜': '1.0'}
     price_mango = mydicts.pop("芒果", "未找到要删除的键值")
     print(price_mango)  # "未找到要删除的键值"
-    print(mydicts)      # {'西瓜': '1.2', '黄瓜': '1.0'}
+    print(mydicts)      # {'西瓜': '1.2', '黄瓜': '1.0'} 
 
