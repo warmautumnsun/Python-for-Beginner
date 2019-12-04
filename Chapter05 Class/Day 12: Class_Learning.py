@@ -1,25 +1,25 @@
 #                            类Class
 # 1--编写一个Dog类，包含name和age两个属性，sit和roll over两个行为：
 
-# ❶Class Dog():
-# ❷   """一次模拟小狗的简单尝试---这是文档字符串对该类进行描述"""
+# Class Dog():
+#    """一次模拟小狗的简单尝试---这是文档字符串对该类进行描述"""
 #
-# ❸   """name和age两个属性"""
+#    """name和age两个属性"""
 #     def __init__(self, name, age):
 #       """初始化属性name和age"""
-# ❹     self.name = name
+#      self.name = name
 #       self.age = age
 #
-# ❺   def sit(self):
+#    def sit(self):
 #       """模拟小狗被命令时蹲下"""
 #       print(self.name.title() + " is now sitting.")
 #
-#     def roll_over(self):
+#    def roll_over(self):
 #       """模拟小狗被命令时打滚"""
 #       print(self.name.title() + " rolled over!")
 
 # 解读：
-# （1）在Python中，首字母大写的名称指的是类。❶
+# （1）在Python中，首字母大写的名称指的是类。
 # （2）类中的函数称为方法，唯一与函数重要的差别是调用方法的方式。
 # （3）__init__()是一个特殊的方法，当创建类的实例时Python都会运行它来根据类创建新实例.
 #     （1.）开头和末尾各有两个下划线，旨在避免Python默认方法与普通方法发生名称冲突.
