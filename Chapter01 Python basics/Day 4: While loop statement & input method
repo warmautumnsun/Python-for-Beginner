@@ -1,0 +1,175 @@
+#                           用户输入input()与While循环
+
+# 本章内容：
+# 1)如何在程序中使用input()来让用户提供信息；
+# 2)如何处理文本和数字输入;
+# 3)如何使用while循环让程序按用户的要求不断地运行；
+# 4)多种控制while循环流程的方式：设置活动标志、使用break语句以及使用continue语句；
+# 5)如何使用while循环在列表之间移动元素，以及如何从列表中删除所有包含特定值的元素；
+# 6)如何结合使用while循环和字典。
+
+# 1--函数input(),返回值是字符串类型的用户输入值.
+# 该函数只接受一个参数,用来提示用户进行输入.
+# message = input("请输入: ")
+# print("您输入的是: " + message)
+#
+number = input("请输入数字: ")
+print("您输入的数字是: " + number + " 它的类型是" + str(type(number)))
+# 您输入的数字是: 1 它的类型是<class 'str'>
+
+
+# 2--函数int(),可将字符串型的数字转为数字:
+# str_number = "99"
+# int_number = int(str_number)
+# print(int_number + 1)  # 100
+#
+# number = int(input("请输入数字: "))
+# print(number + 1)
+
+
+# 3--求模运算: % 两个数相除返回余数.
+# number = int(input("请输入一个数字: "))
+# if number % 2 == 0:
+#     print("您输入的数字 " + str(number) + "是一个偶数")
+# else:
+#     print("您输入的数字 " + str(number) + "是一个奇数")
+
+
+# 4--while循环:
+#
+# 1)--语法:
+# # while condition==true:
+# #     do something
+#
+# i = 1
+# while i < 5:
+#     print(i)
+#     i += 1
+
+# 2)--让用户选择何时退出:
+# promt = "\nTell me something, and i will repeat it back to you:"
+# promt += "\nEnter 'quit' to end the program."
+# message = ""
+# while message != 'quit':
+#     message = input(promt)
+#     if message != "quit":
+#         print(message)
+
+# 3)--使用布尔类型标志来决定循环是否继续:
+# #     当需要满足很多条件才能继续循环的情况下,使用if判断将会变得复杂,而使用标志,只要有一
+# # 个条件不满足就能控制循环的进行:
+
+# promt = "\nTell me something, and i will repeat it back to you:"
+# promt += "\nEnter 'quit' to end the program."
+# active = True
+# while active:
+#     message = input(promt)
+#
+#     if message == "quit":
+#         active = False
+#     else:
+#         print(message)
+
+# 4)--使用break退出循环:
+# 要立即退出while循环,不再运行循环中剩余的代码,也不管条件测试的结果如何,可使用break语句.
+# 不止while循环,任何类型的循环,如for in 循环也可以使用break.
+# 下面以while True打头的循环为例:
+# promt = "\nTell me something, and i will repeat it back to you:"
+# promt += "\nEnter 'quit' to end the program."
+# while True:
+#     message = input(promt)
+#
+#     if message == "quit":
+#         break
+#     else:
+#         print(message)
+
+# i = 0
+# while i < 10:
+#     i += 1  # 控制循环的计数器放在continue之前.
+#     if i % 2 == 0:
+#         break  # 会导致程序终止
+#         print("为偶数")  # 这句将会被忽略
+#     print(str(i) + "为奇数") # 当if 语句满足时，此句将会被忽略。
+# 1为奇数
+
+# 5)--在循环中使用continue:
+# # 当执行到continue时,忽略剩下的代码并返回到循环的开头,并根据条件测试结果决定是否继续执
+# # 行循环,可使用continue语句,它不像break语句那样不再执行余下的代码并彻底退出循环.
+# # 注意控制循环的计数器要在continue之前位置设定好增长规律,否则可能因continue的执行而被
+# # 忽略.
+i = 0
+while i < 10:
+    i += 1  # 控制循环的计数器放在continue之前.
+    if i % 2 == 0:
+        continue  # 如果为偶数,忽略剩下的代码,并返回到while condition处继续判断.
+        print("为偶数")  # 这句将会被忽略
+    print(str(i) + "为奇数") # 当if 语句满足时，此句将会被忽略。
+
+# 1为奇数
+# 3为奇数
+# 5为奇数
+# 7为奇数
+# 9为奇数
+
+
+
+# 6)--避免无限循环:
+# 当循环条件为真,而循环体内不存在使循环条件为假的情况时,会使循环陷入无限循环.
+# 如:
+
+# x=1
+# while x<5:
+#     print(x)
+# 可以使用ctrl+c来结束循环.
+
+
+# 7)--使用while循环来处理列表和字典:
+# for循环可有效遍历列表,但不应该使用它修改列表,否则难以追踪其中的元素,要在遍历列表的同时
+# 修改元素,可使用while循环.while循环同列表和字典结合使用,可收集,存储并组织大量的输入,
+# 供以后查看和显示.
+
+# (7-1) 在不同列表之间移动元素:
+
+# 创建一个待验证用户列表和一个用于存储已验证用户的空列表:
+unconfirmed_users = ['alice', 'brian', 'candace']
+confirmed_users = []
+
+# 验证每个用户,直到没有未验证用户为止
+# 将每个经过验证的列表都移到已验证用户列表中
+while unconfirmed_users:  # 当unconfirmed_users列表不为空时:
+    current_user = unconfirmed_users.pop()
+    confirmed_users.append(current_user)
+
+# 显示所有已验证的用户:
+print("\nThe following users have been confirmed:")
+for confirmed_user in confirmed_users:
+    print(confirmed_user.title())
+
+# (7-2) 使用用户输入来填充字典:
+# 通过用户输入来获得字典的键和值,存入字典中:
+
+responses = {}
+polling_active = True
+while polling_active:
+    # 提示输入被调查者的名字和回答
+    name = input("\nWhat is your name? ")
+    response = input("Which mountain would you like to climb someday? ")
+
+    # 将答卷存储在字典中
+    responses[name] = response
+
+    # 看看是否还有人要参与调查
+    repeat = input("Would you like to let another person respond? (yes/ no) ")
+
+    if repeat == 'no':
+        polling_active = False
+
+# 调查结束， 显示结果
+print("\n--- Poll Results ---")
+for name, response in responses.items():
+    print(name + " would like to climb " + response + ".")
+
+# \t表示空四个字符，也称缩进，相当于按一下Tab键
+# \n表示换行，相当于按一下回车
+# \n\t表示换行加每行空四格
