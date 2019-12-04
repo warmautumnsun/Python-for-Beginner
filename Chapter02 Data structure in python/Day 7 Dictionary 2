@@ -1,0 +1,246 @@
+# 一，创建字典：
+# (1)dic={key1:value1,key2:value2...}
+# (2)函数dict创建字典。
+
+# 没有空字典，最简单的字典只有一个键值对（项Iterm）。无序，没有索引。
+# 字典即可以用来存储同一个对象的多种信息（如一个学生的姓名，年龄，体重等）。
+# 也可以用来存储多种相似对象（如key为name，value为score）。
+# 键不可重复，值可以重复。
+# 字典是python中唯一的内置映射类型，其中的值不按顺序排列，而是储存在键下。
+# 键可以是数字，字符串或元组！
+
+# 1-定义字典：
+mydicts = {"西瓜": "1.2", "桃子": "1.5", "黄瓜": "1.0"}
+mydict02 = {}  # 创建一个空字典
+
+# 2-获取字典的值：
+price_pea = mydicts["桃子"]
+print(price_pea)
+print(mydicts)
+
+# 3-修改字典的值：
+mydicts["桃子"] = "2.5"
+print(mydicts)
+
+# 4-增加字典的元素：
+mydicts["樱桃"] = "30"
+print(mydicts)
+
+# 5-删除字典特定元素：
+del mydicts["黄瓜"]
+print(mydicts)
+
+# 6-删除字典所有元素--变为空字典：
+# mydicts.clear()
+# print(mydicts)
+
+# 7-删除字典：
+# del mydicts
+# print(mydicts) # 报错
+
+# 8-字典的复制：
+# 为了保护原字典，往往需要复制一个新字典：新旧字典的地址是不一样的
+mydict02 = mydicts.copy()
+
+print(id(mydicts))  # 2502481540440
+print(id(mydict02))  # 2502481541088
+
+# 9-获取字典的长度:
+print(len(mydicts))  # len(列表，元组，字符串，字典)
+
+# 10-验证元素(key)是否存在：
+# key in dict:
+if "西瓜" in mydicts:
+    print("西瓜存在于字典中")
+
+# 二，遍历字典：
+# 1-遍历键值对：        for k,v in dict.items():
+# 2-遍历键：           for k in dict.keys():
+# 3-遍历值：           for v in dict.values():
+# 4-遍历值：通过键找值：
+# for k in dict.keys():
+#     print(dict[k])
+
+# 5-先对keys或values排序再遍历：
+favorite_languages = {"tom": "java",
+                      "ivan": "java",
+                      "alex": "vba",
+                      "taylor": "python"}
+
+# 按顺序遍历所有的键：对键进行临时排序：
+for k in sorted(favorite_languages.keys()):
+    print("sorted_key:" + k.title())
+# sorted_key:Alex
+# sorted_key:Ivan
+# sorted_key:Taylor
+# sorted_key:Tom
+
+# 按顺序遍历所有的值：对值进行临时排序：
+for v in sorted(favorite_languages.values()):
+    print("sorted_value:" + v.title())
+# sorted_value:Java
+# sorted_value:Java
+# sorted_value:Python
+# sorted_value:Vba
+
+print(type(favorite_languages.values()))  # <class 'dict_values'>
+
+# 三，数据结构的嵌套：
+#
+# 1- 字典列表： List(dict1, dict2 dict3...)
+# 游戏开发： 需求1：在一个列表中创建50个士兵solider(列表的元素可以重复)
+soliders = []
+
+for i in range(50):
+    solider = {"tag": 'red', 'score': 3, 'speed': 'slow'}
+    soliders.append(solider)
+
+# 打印前3个：
+for solider in soliders[:3]:
+    print(solider)
+# 打印列表的长度：
+print('小兵数量=', len(soliders))
+
+# 游戏开发： 需求2：修改列表第30-第35名的tag为blue,score为5，speed 为medium
+for solider in soliders[30:36]:  # 含左不含右
+    solider['tag'] = 'blue'
+    solider['score'] = 5
+    solider['speed'] = 'medium'
+
+for solider in soliders[25:40]:
+    print(solider)
+
+# 2- 列表字典 (字典的值为列表)：dict(key1:list1,key2:list2,key3:list3...)
+
+favorite_languages = {"tom": ["java", "vba"],
+                      "ivan": ["vba", "java", "python"],
+                      "taylor": ["python"]}
+
+print(favorite_languages["ivan"])  # ['vba', 'java', 'python']
+
+# 遍历列表字典,外层for k,v in dict.items(),内层for e in v.
+for name, languages in favorite_languages.items():
+    print("\n" + name.title() + "'s favorite languages are:")
+    for language in languages:
+        print("\t" + language.title())
+
+# 3- 字典内含字典 字典为字典的值 dict{key1:dict1,key2:dict2,key3:dict3...}
+users = {"aeinstein": {
+    "firstname": "albert",
+    "lastname": "einstein",
+    "location": "beijing"},
+    "mcuries": {
+        "firstname": "marie",
+        "lastname": "curie",
+        "location": "paris"}}
+
+for username, user_info in users.items():
+    print("\nUsername:" + username)
+    fullname = user_info["firstname"] + " " + user_info["lastname"]
+    location = user_info["location"]
+
+    print("Fullname:" + fullname.title())
+    print("Location:" + location.title())
+
+# Username:aeinstein
+# Fullname:Albert Einstein
+# Location:Beijing
+#
+# Username:mcuries
+# Fullname:Marie Curie
+# Location:Paris
+
+# 四，while循环在字典中的应用： 将用户的输入（用户名和喜爱的城市）存入字典中：
+survey_dict = {}  # 建立空字典用于存放调查结果
+bo_input = True  # 设定循环布尔值
+
+while bo_input:
+    name = input("\n请输入姓名: ")
+    city = input("\请输入最喜爱的城市")
+
+    # 将输入存入字典
+    survey_dict[name] = city
+    repeat = input("继续调查？(y/n)")
+
+    if repeat != "y":
+        bo_input = False  # 退出循环的条件
+
+print("\n以下是调查结果：")
+for k, v in survey_dict.items():
+    print(k, "喜欢的城市是：", v)
+
+# 五，字典常用的函数和方法
+
+# 1--Len(dict)                             列出字典的元素个数     built-in 函数
+# 2--my_dict=dict.fromkeys(seq[,value])    使用seq序列建立字典    类方法
+    #    即，把字符串，列表，元组等序列转化为字典，序列作为键，如果不设定值，则值为None.
+    #    []表示可选。
+
+    # 列表序列
+    list1 = ["name", "city"]
+    list_dict1 = dict.fromkeys(list1)
+    list_dict2 = dict.fromkeys(list1, "张三")
+    print(list_dict1)
+    print(list_dict2)
+
+    # {'name': None, 'city': None}
+    # {'name': '张三', 'city': '张三'}
+
+    # 元组序列
+    tup1 = ("name", "city")
+    tup_dict1 = dict.fromkeys(tup1)
+    tup_dict2 = dict.fromkeys(tup1, "张三")
+    print(tup_dict1)
+    print(tup_dict2)
+
+    # {'name': None, 'city': None}
+    # {'name': '张三', 'city': '张三'}
+
+    # 字符串序列
+    str1 = "ABC"
+    str_dict1 = dict.fromkeys(str1)
+    str_dict2 = dict.fromkeys(str1, "a")
+    print(str_dict1)
+    print(str_dict2)
+
+    # {'A': None, 'B': None, 'C': None}
+    # {'A': 'a', 'B': 'a', 'C': 'a'}
+
+    # 注：fromkeys方法不是dict这个父类的私有方法，所有的字典实例都可以继承和使用它。
+    # list1 = ["name", "city"]
+    # mydicts = {"西瓜": "1.2", "桃子": "1.5", "黄瓜": "1.0"}
+    # list_dict=mydicts.fromkeys(list1,"hh")
+    # print(list_dict)  # {'name': 'hh', 'city': 'hh'}
+
+# 3--v=my_dict.get(k[，default=none])            由键得值             类实例方法
+    # 搜寻字典的键，如果键存在，返回该键的值，不存在则返回默认值。
+    mydicts = {"西瓜": "1.2", "桃子": "1.5", "黄瓜": "1.0"}
+    price_pea1 = mydicts["桃子"]  # 一般方法
+    price_pea2 = mydicts.get("桃子")  # get方法
+    print(price_pea1, price_pea2)  # 1.5  1.5
+
+# 4--v=my_dict.setdefault(key[,default=none])  键在得值，不在设值。    类实例方法
+    mydicts = {"西瓜": "1.2", "桃子": "1.5", "黄瓜": "1.0"}
+
+    # 1)-键在的情况，返回其原值
+    price_xg1=mydicts.setdefault("西瓜")
+    price_xg2=mydicts.setdefault("西瓜", 1.5)
+    print(price_xg1)  # 1.2
+    print(price_xg2)  # 1.2
+
+    # 2)-键不在的情况，设置新值
+    price_banana1 = mydicts.setdefault("香蕉")
+    price_boluo1 = mydicts.setdefault("菠萝", 1.8)
+    print(price_banana1)  # None
+    print(price_boluo1)  # 1.8
+
+# 5--v=my_dict.pop(key[,default])      删除键值对,并返回key对应的值      类实例方法
+    # key不存在时，返回值为设定的默认值。
+    mydicts = {"西瓜": "1.2", "桃子": "1.5", "黄瓜": "1.0"}
+    price_pea=mydicts.pop("桃子","未找到要删除的键值")
+    print(price_pea)    # 1.5
+    print(mydicts)      # {'西瓜': '1.2', '黄瓜': '1.0'}
+    price_mango = mydicts.pop("芒果", "未找到要删除的键值")
+    print(price_mango)  # "未找到要删除的键值"
+    print(mydicts)      # {'西瓜': '1.2', '黄瓜': '1.0'}
+
